@@ -1,6 +1,8 @@
-# demo-API-GTIN
+# Client-API-GTIN
 
 OSCBR - Open Source Community Brasil
+
+Link para cadastro de usuario: https://oscbr.com.br/gtincadastro
 
 Como utilizar
 
