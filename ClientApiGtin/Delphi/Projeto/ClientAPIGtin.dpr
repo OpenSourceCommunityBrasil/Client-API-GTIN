@@ -1,10 +1,10 @@
-program RscGtinDemo;
+program ClientAPIGtin;
 
 uses
   Vcl.Forms,
-  uFrmGtin in '..\View\uFrmGtin.pas' {FrmGtin},
-  uRscGtin.Classes in '..\Classes\uRscGtin.Classes.pas',
-  uRscGtin.Consts in '..\Consts\uRscGtin.Consts.pas';
+  uFrmMainClientGtin in '..\View\uFrmMainClientGtin.pas' {FrmGtin},
+  uClientGtin.Classes in '..\Classes\uClientGtin.Classes.pas',
+  uClientGtin.Consts in '..\Consts\uClientGtin.Consts.pas';
 
 {$R *.res}
 

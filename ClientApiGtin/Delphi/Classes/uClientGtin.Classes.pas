@@ -4,7 +4,10 @@
                                                   API GTIN
 ####################################################################################################################
     Owner.....: Roniery Santos Cardoso / OSCBR
+    youtube...: https://www.youtube.com/@RSC_SISTEMA
     Github....: https://github.com/OpenSourceCommunityBrasil/demo-API-GTIN
+####################################################################################################################
+
 ####################################################################################################################
 OpenSourceCommunityBrasil/demo-API-GTIN está licenciado sob a Licença Pública Geral GNU v3.0
 
@@ -31,7 +34,7 @@ Condições
 ####################################################################################################################
 }
 
-unit uRscGtin.Classes;
+unit uClientGtin.Classes;
 
 interface
 

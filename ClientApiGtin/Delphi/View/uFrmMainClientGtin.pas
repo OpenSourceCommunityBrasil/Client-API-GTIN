@@ -4,7 +4,10 @@
                                                   API GTIN
 ####################################################################################################################
     Owner.....: Roniery Santos Cardoso / OSCBR
+    youtube...: https://www.youtube.com/@RSC_SISTEMA
     Github....: https://github.com/OpenSourceCommunityBrasil/demo-API-GTIN
+####################################################################################################################
+
 ####################################################################################################################
 OpenSourceCommunityBrasil/demo-API-GTIN está licenciado sob a Licença Pública Geral GNU v3.0
 
@@ -31,17 +34,17 @@ Condições
 ####################################################################################################################
 }
 
-unit uFrmGtin;
+unit uFrmMainClientGtin;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, dxGDIPlusClasses, vcl.Imaging.pngimage, vcl.Imaging.jpeg
+  Vcl.Buttons, dxGDIPlusClasses, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
 
-  , uRscGtin.Classes
-  , uRscGtin.Consts
+  , uClientGtin.Classes
+  , uClientGtin.Consts
 
   , IdHTTP
 
@@ -105,11 +108,15 @@ type
     Label23: TLabel;
     edt_produto_acento: TEdit;
     img_produto: TImage;
+    Image1: TImage;
+    Image2: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure sbtn_pesquisar_eanClick(Sender: TObject);
     procedure edt_usuarioChange(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
   private
     Ftoken: TToken;
     FProduto : TProduto;
@@ -162,13 +169,14 @@ end;
 
 procedure TFrmGtin.FormShow(Sender: TObject);
 begin
-  lblTitle.Caption := TITLE;
-  lblversao.Caption :=  'Versão API: ' + VERSAO_API  + ' - Versão DEMO: '  + VERSÃO_DEMO ;
+  sELF.Caption      :=  TITLE;
+  lblTitle.Caption  := Self.Caption;
+  lblversao.Caption :=  'Versão API: ' + VERSAO_API  + ' - Versão Cliente: '  + VERSÃO_DEMO ;
 
   edt_pesquisa_ean.Text :=  '7891222216644';
 
-  edt_usuario.Text  :=  'roniery';
-  edt_senha.Text    :=  '1234';
+  edt_usuario.Text  :=  'Usuário';
+  edt_senha.Text    :=  'Senha';
 end;
 
 procedure TFrmGtin.GetFotoProduto;
@@ -290,16 +298,38 @@ begin
   end;
 end;
 
+procedure TFrmGtin.Image1Click(Sender: TObject);
+begin
+  ShellExecute(Handle,
+               'open',
+               'https://github.com/OpenSourceCommunityBrasil/Client-API-GTIN',
+               nil,
+               nil,
+               SW_SHOWMAXIMIZED);
+end;
+
+procedure TFrmGtin.Image2Click(Sender: TObject);
+begin
+  ShellExecute(Handle,
+               'open',
+               'https://oscbr.com.br/gtinmain',
+               nil,
+               nil,
+               SW_SHOWMAXIMIZED);
+end;
+
 function TFrmGtin.obterToken: Boolean;
 var
   Strm: TStringStream;
   vIdHTTP : TIdHTTP;
   retorno : string;
+  raw : TStringList;
 begin
   Result :=  True;
   Screen.Cursor := crHourGlass;
   Strm := TStringStream.Create('', TEncoding.UTF8);
   vIdHTTP := TIdHTTP.Create(nil);
+  raw := TStringList.Create;
   try
     try
       vIdHTTP.Request.CustomHeaders.Clear;
@@ -307,7 +337,7 @@ begin
       vIdHTTP.Request.CustomHeaders.AddValue('password', Trim(edt_senha.Text));
       vIdHTTP.Request.BasicAuthentication :=  False;
       retorno  :=  vIdHTTP.Post(ENDPOINT_GETTOKEN, Strm);
-
+      raw.Text  :=  vIdHTTP.Response.RawHeaders.Text;
       case vIdHTTP.ResponseCode  of
         200:
           begin
@@ -323,6 +353,7 @@ begin
       end;
     except on E: Exception do
       begin
+        raw.Text  :=  vIdHTTP.Response.RawHeaders.Text;
         if Ftoken <> nil then
           Ftoken.Free;
         Result :=  False;
@@ -333,6 +364,7 @@ begin
     Strm.Free;
     vIdHTTP.Free;
     Screen.Cursor := crDefault;
+    raw.Free;
   end;
 end;
 

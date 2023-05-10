@@ -4,11 +4,11 @@
         <ProjectVersion>19.5</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>RscGtinDemo.dpr</MainSource>
+        <MainSource>ClientAPIGtin.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -57,7 +57,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>RscGtinDemo</SanitizedProjectName>
+        <SanitizedProjectName>ClientAPIGtin</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>FireDACIBDriver;SampleListViewMultiDetailAppearancePackage;dxPSdxSpreadSheetLnkRS28;TMSVCLUIPackPkgWizD11_2;vclwinx;DataSnapServer;RESTDWWizards;ACBr_TCP;dacvcl280;ACBr_BPeDabpeESCPOS;ACBr_ONE;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;cxExportRS28;dxHttpIndyRequestRS28;appanalytics;IndyProtocols;vclx;dxPSPrVwRibbonRS28;frxe28;dbxcds;vcledge;dxTileControlRS28;dxPSdxDBOCLnkRS28;cxPivotGridOLAPRS28;RESTDWUniDACDriver;Skia.Package.RTL;FmxTeeUI;ACBr_OpenSSL;RtmRxDB280;ACBr_BoletoRL;dxGDIPlusRS28;unidac280;DBXFirebirdDriver;dxCoreRS28;cxPivotGridRS28;ACBr_CTeDacteFR;fsDB28;ACBr_NFCeECFVirtual;JvAppFrm;dxPSCoreRS28;FireDACSqliteDriver;DbxClientDriver;dxSpreadSheetRS28;dxSkinsCoreRS28;TInjectCollection;JclVcl;soapmidas;dxBarRS28;dxSpreadSheetInplaceRichEditRS28;TeeUI;dxADOServerModeRS28;dxWizardControlRS28;Jcl;dbexpress;JvManagedThreads;ACBr_PagFor;ACBr_NF3eDANF3eESCPOS;CEF4DelphiVCLRTL;ACBr_Reinf;unidacvcl280;inet;dxServerModeRS28;dacfmx280;TMSVCLUIPackPkgD11_2;vcltouch;cxTreeListRS28;dxBarDBNavRS28;JvDB;FireDACDBXDriver;dxSpreadSheetCoreDialogsRS28;fmxdae;dxPScxCommonRS28;JvCustom;dxNavBarRS28;CustomIPTransport;FireDACMSSQLDriver;JvSystem;EhLibIBXDataDrivers280;RscPix;ACBr_NFSeX;uniGUI28m;CEF4DelphiFMXRTL;JvControls;ACBr_NFe;dxSpreadSheetReportDesignerRS28;TMSVCLUIPackPkgXlsD11_2;dxFireDACEMFRS28;ACBr_CTeDacteRL;JvCrypt;dxComnRS28;JvJans;JvMM;IndySystem;dxFlowChartDesignerRS28;ACBr_Diversos;ACBr_GNREGuiaRL;cxVerticalGridRS28;ACBr_NFSeXDanfseRL;ACBr_SAT;JvGlobus;ibxbindings;dxPSDBTeeChartRS28;dxmdsRS28;dxRichEditControlRS28;cxSchedulerGridRS28;dxPsPrVwAdvRS28;JclContainers;dxPScxSchedulerLnkRS28;dxPSdxOCLnkRS28;ACBr_CIOT;JvPageComps;ACBr_TEFD;vclFireDAC;ACBr_SPED;ACBr_CTe;ACBr_SATWS;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;dxADOEMFRS28;dxRibbonCustomizationFormRS28;dxPSdxDBTVLnkRS28;unidacfmx280;ACBr_SEF2;ACBr_LCDPR;bindcompdbx;dxGaugeControlRS28;rtl;FireDACMySQLDriver;dxDockingRS28;dxPDFViewerRS28;ACBr_NFeDanfeFR;frce;ACBr_BPe;DBXSqliteDriver;dxBarExtItemsRS28;TMSVCLUIPackPkgExD11_2;dxPSdxFCLnkRS28;ACBr_Sintegra;dxorgcRS28;DBXSybaseASEDriver;dxSpreadSheetCoreConditionalFormattingDialogsRS28;JvRuntimeDesign;ACBr_Serial;ACBr_Comum;ACBr_MDFe;JvXPCtrls;dxPSRichEditControlLnkRS28;ACBr_NFeDanfeESCPOS;vclimg;DataSnapFireDAC;inetdbxpress;FireDAC;JvDocking;JvDlgs;xmlrtl;RESTDWCore;ibxpress;dsnap;JvCmp;FireDACDb2Driver;cxSchedulerRibbonStyleEventEditorRS28;DBXOracleDriver;dxPScxTLLnkRS28;DBXInformixDriver;EhLibDBXDataDrivers280;vclib;ACBr_SATECFVirtual;fmxobj;bindcompvclsmp;DataSnapNativeClient;dxFlowChartRS28;ACBr_SATExtratoFR;dxPScxPCProdRS28;DatasnapConnectorsFreePascal;ACBr_NF3e;ACBr_PAF;ACBr_OpenDelivery;ACBr_MDFeDamdfeFR;ACBr_SPEDImportar;emshosting;dxRichEditDocumentModelRS28;dxPSdxMapControlLnkRS28;RESTDWSocketIndy;dxPScxVGridLnkRS28;dxPScxPivotGridLnkRS28;FireDACCommonDriver;uniGUI28Chart;ACBr_ADRCST;EhLib280;ACBr_MTER;IndyIPClient;dxCloudServiceLibraryRS28;cxLibraryRS28;dac280;bindcompvclwinx;ACBr_Convenio115;ACBr_NFSeDanfseFR;emsedge;bindcompfmx;JvBands;dxPSdxPDFViewerLnkRS28;inetdb;dxSpreadSheetCoreRS28;cxSchedulerTreeBrowserRS28;ibmonitor;FireDACASADriver;dxTabbedMDIRS28;RESTDWFireDACDriver;Tee;dxRichEditInplaceRS28;ACBr_LFD;vclactnband;fmxFireDAC;dxFireDACServerModeRS28;FireDACInfxDriver;DBXMySQLDriver;VclSmp;dxPSdxLCLnkRS28;DataSnapCommon;JvPascalInterpreter;ACBr_Ponto;fmxase;dxdbtrRS28;frx28;JvPluginSystem;DBXOdbcDriver;JvTimeFramework;dbrtl;fsFD28;FireDACOracleDriver;dxPSLnksRS28;Skia.Package.FMX;ACBr_NFSe;TeeDB;ACBre_Social;ACBr_NFSeDanfseRL;FireDACMSAccDriver;DataSnapIndy10ServerTransport;JclDeveloperTools;DataSnapConnectors;ACBr_ANe;ACBr_SATExtratoRL;vcldsnap;DBXInterBaseDriver;frxDB28;FireDACMongoDBDriver;JvWizards;ACBR_DeSTDA;dxSpreadSheetConditionalFormattingDialogsRS28;ACBr_GNRE;ACBr_EDI;FireDACTDataDriver;Skia.Package.VCL;vcldb;dxDBXServerModeRS28;cxSchedulerRS28;ACBr_Integrador;ACBr_PIXCD;dxRibbonRS28;uSynEdit_R2024;TBGWebCharts;dxFlowChartLayoutsRS28;dxPScxExtCommonRS28;RESTDWShellServices;dxdborRS28;JvCore;fs28;dxRichEditControlCoreRS28;bindcomp;RtmRxCtl280;vquery280;ACBr_BoletoFR;dxPScxGridLnkRS28;IndyCore;RESTBackendComponents;cxPivotGridChartRS28;dxBarExtDBItemsRS28;dxRichEditCoreRS28;cxTreeListdxBarPopupMenuRS28;dxFlowChartAdvancedCustomizeFormRS28;FireDACADSDriver;RESTComponents;dxPSTeeChartRS28;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;DataSnapClient;DataSnapProviderClient;JvDotNetCtrls;JvHMI;cxSchedulerWebServiceStorageRS28;dxtrmdRS28;ACBr_MDFeDamdfeRL;uniGUI28VCL;ACBr_NFSeXDANFSeFR;DBXDb2Driver;dxPSdxGaugeControlLnkRS28;cxGridRS28;dxSpellCheckerRS28;ACBr_Boleto;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;JvPrintPreview;EhLibADODataDrivers280;ACBr_SATExtratoESCPOS;tethering;JvStdCtrls;dxMapControlRS28;crcontrols280;ACBr_BlocoX;bindcompvcl;dxEMFRS28;ACBr_GTIN;CloudService;DBXSybaseASADriver;ACBr_OFX;ACBr_PAFNFCe;FMXTee;ACBr_NFeDanfeRL;ACBr_GNREGuiaFR;soaprtl;soapserver;JvNet;$(DCC_UsePackage)</DCC_UsePackage>
@@ -67,6 +67,9 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_ExeOutput>.\..\..\Bin\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>.\..\..\Bin\$(Platform)\$(Config)\lixo</DCC_DcuOutput>
+        <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>FireDACIBDriver;dxPSdxSpreadSheetLnkRS28;vclwinx;DataSnapServer;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;DBXMSSQLDriver;FireDACCommonODBC;emsclient;cxExportRS28;dxHttpIndyRequestRS28;appanalytics;IndyProtocols;vclx;dxPSPrVwRibbonRS28;dbxcds;vcledge;dxTileControlRS28;dxPSdxDBOCLnkRS28;cxPivotGridOLAPRS28;RESTDWUniDACDriver;Skia.Package.RTL;FmxTeeUI;dxGDIPlusRS28;DBXFirebirdDriver;cxPivotGridRS28;dxPSCoreRS28;FireDACSqliteDriver;DbxClientDriver;dxSpreadSheetRS28;dxSkinsCoreRS28;soapmidas;dxBarRS28;dxSpreadSheetInplaceRichEditRS28;TeeUI;dxADOServerModeRS28;dxWizardControlRS28;dbexpress;CEF4DelphiVCLRTL;inet;dxServerModeRS28;TMSVCLUIPackPkgD11_2;vcltouch;cxTreeListRS28;dxBarDBNavRS28;FireDACDBXDriver;dxSpreadSheetCoreDialogsRS28;fmxdae;dxPScxCommonRS28;dxNavBarRS28;CustomIPTransport;FireDACMSSQLDriver;EhLibIBXDataDrivers280;uniGUI28m;CEF4DelphiFMXRTL;dxSpreadSheetReportDesignerRS28;TMSVCLUIPackPkgXlsD11_2;dxFireDACEMFRS28;dxComnRS28;IndySystem;dxFlowChartDesignerRS28;cxVerticalGridRS28;ibxbindings;dxPSDBTeeChartRS28;dxmdsRS28;dxRichEditControlRS28;cxSchedulerGridRS28;dxPsPrVwAdvRS28;dxPScxSchedulerLnkRS28;dxPSdxOCLnkRS28;vclFireDAC;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;dxADOEMFRS28;dxRibbonCustomizationFormRS28;dxPSdxDBTVLnkRS28;bindcompdbx;dxGaugeControlRS28;rtl;FireDACMySQLDriver;dxDockingRS28;dxPDFViewerRS28;DBXSqliteDriver;dxBarExtItemsRS28;TMSVCLUIPackPkgExD11_2;dxPSdxFCLnkRS28;dxorgcRS28;DBXSybaseASEDriver;dxSpreadSheetCoreConditionalFormattingDialogsRS28;dxPSRichEditControlLnkRS28;vclimg;DataSnapFireDAC;inetdbxpress;FireDAC;xmlrtl;RESTDWCore;ibxpress;dsnap;FireDACDb2Driver;cxSchedulerRibbonStyleEventEditorRS28;DBXOracleDriver;dxPScxTLLnkRS28;DBXInformixDriver;EhLibDBXDataDrivers280;vclib;fmxobj;bindcompvclsmp;DataSnapNativeClient;dxFlowChartRS28;dxPScxPCProdRS28;DatasnapConnectorsFreePascal;emshosting;dxRichEditDocumentModelRS28;dxPSdxMapControlLnkRS28;RESTDWSocketIndy;dxPScxVGridLnkRS28;dxPScxPivotGridLnkRS28;FireDACCommonDriver;uniGUI28Chart;EhLib280;IndyIPClient;dxCloudServiceLibraryRS28;bindcompvclwinx;emsedge;bindcompfmx;dxPSdxPDFViewerLnkRS28;inetdb;dxSpreadSheetCoreRS28;cxSchedulerTreeBrowserRS28;ibmonitor;FireDACASADriver;dxTabbedMDIRS28;RESTDWFireDACDriver;Tee;dxRichEditInplaceRS28;vclactnband;fmxFireDAC;dxFireDACServerModeRS28;FireDACInfxDriver;DBXMySQLDriver;VclSmp;dxPSdxLCLnkRS28;DataSnapCommon;fmxase;dxdbtrRS28;DBXOdbcDriver;dbrtl;FireDACOracleDriver;dxPSLnksRS28;Skia.Package.FMX;TeeDB;FireDACMSAccDriver;DataSnapIndy10ServerTransport;DataSnapConnectors;vcldsnap;DBXInterBaseDriver;FireDACMongoDBDriver;dxSpreadSheetConditionalFormattingDialogsRS28;FireDACTDataDriver;Skia.Package.VCL;vcldb;dxDBXServerModeRS28;cxSchedulerRS28;dxRibbonRS28;uSynEdit_R2024;dxFlowChartLayoutsRS28;dxPScxExtCommonRS28;RESTDWShellServices;dxdborRS28;dxRichEditControlCoreRS28;bindcomp;dxPScxGridLnkRS28;IndyCore;RESTBackendComponents;cxPivotGridChartRS28;dxBarExtDBItemsRS28;dxRichEditCoreRS28;cxTreeListdxBarPopupMenuRS28;dxFlowChartAdvancedCustomizeFormRS28;FireDACADSDriver;RESTComponents;dxPSTeeChartRS28;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;DataSnapClient;DataSnapProviderClient;cxSchedulerWebServiceStorageRS28;dxtrmdRS28;uniGUI28VCL;DBXDb2Driver;dxPSdxGaugeControlLnkRS28;cxGridRS28;dxSpellCheckerRS28;emsclientfiredac;FireDACPgDriver;FireDACDSDriver;EhLibADODataDrivers280;tethering;dxMapControlRS28;bindcompvcl;dxEMFRS28;CloudService;DBXSybaseASADriver;FMXTee;soaprtl;soapserver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -84,6 +87,10 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <DCC_ExeOutput>.\..\..\Bin\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>.\..\..\Bin\$(Platform)\$(Config)\lixo</DCC_DcuOutput>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -93,17 +100,21 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <DCC_ExeOutput>.\..\..\Bin\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>.\..\..\Bin\$(Platform)\$(Config)\lixo</DCC_DcuOutput>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\View\uFrmGtin.pas">
+        <DCCReference Include="..\View\uFrmMainClientGtin.pas">
             <Form>FrmGtin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Classes\uRscGtin.Classes.pas"/>
-        <DCCReference Include="..\Consts\uRscGtin.Consts.pas"/>
+        <DCCReference Include="..\Classes\uClientGtin.Classes.pas"/>
+        <DCCReference Include="..\Consts\uClientGtin.Consts.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -122,19 +133,23 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">RscGtinDemo.dpr</Source>
+                    <Source Name="MainSource">ClientAPIGtin.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\RscGtinDemo.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\Bin\Win32\Release\ClientAPIGtin.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>RscGtinDemo.exe</RemoteName>
+                        <RemoteName>ClientAPIGtin.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Release\RscGtinDemo.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\ClientAPIGtin.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>RscGtinDemo.exe</RemoteName>
+                        <RemoteName>ClientAPIGtin.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
