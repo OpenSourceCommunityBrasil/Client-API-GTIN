@@ -11,7 +11,7 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
     <div class="container">
         <div class="row row-rsc">
             <div class="col-10" style="text-align: center;">
-                <h2>Documentação API GTIN</h2>
+                <h2>Documentação API GTIN V1.0.1</h2>
                 <h4>A seguir poderá encontrar todo o passo a passo para fezer uso de nossa api.</h4>
             </div>
         </div>
