@@ -41,7 +41,7 @@ interface
 
 const
 
-  VERSAO_API  = '1.0';
+  VERSAO_API  = '1.0.1';
   VERSÃO_DEMO = '1.0';
 
   TITLE = 'CLIENT API GTIN by: OSCBR - Open Source Community Brasil';

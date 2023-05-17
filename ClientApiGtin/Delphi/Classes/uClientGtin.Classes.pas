@@ -51,46 +51,35 @@ type
 
   TProduto = class
   private
-    Fvalor_medio: double;
-    FErro: integer;
-    FAtualizado: integer;
-    FValor: double;
-    Fcest_codigo: string;
+    Fean_tipo: string;
+    FCest: string;
+    Funid_abr: string;
     Flink_foto: string;
-    FCategoria: string;
-    FNcm: integer;
-    FAvg: double;
-    FEmbalagem: string;
-    FTributacao: string;
-    Fproduto_acento: string;
-    FMarca: string;
+    FNcm: Integer;
+    Fnome_acento: string;
     FNome: string;
     FEan: string;
+    Funid_desc: string;
     Fdh_update: string;
+    FCategoria: string;
+    FMarca: string;
     FPais: string;
-    Fquantidade_embalagem: double;
-    FEx: integer;
+
 
   public
-    property Atualizado           : integer read FAtualizado           write FAtualizado;
-    property Avg                  : double read FAvg                  write FAvg;
-    property Categoria            : string read FCategoria            write FCategoria;
-    property cest_codigo          : string read Fcest_codigo          write Fcest_codigo;
-    property dh_update            : string read Fdh_update            write Fdh_update;
-    property Ean                  : string read FEan                  write FEan;
-    property Embalagem            : string read FEmbalagem            write FEmbalagem;
-    property Erro                 : integer read FErro                 write FErro;
-    property Ex                   : integer read FEx                   write FEx;
-    property link_foto            : string read Flink_foto            write Flink_foto;
-    property Marca                : string read FMarca                write FMarca;
-    property Ncm                  : integer read FNcm                  write FNcm;
-    property Nome                 : string read FNome                 write FNome;
-    property Pais                 : string read FPais                 write FPais;
-    property produto_acento       : string read Fproduto_acento       write Fproduto_acento;
-    property quantidade_embalagem : double read Fquantidade_embalagem write Fquantidade_embalagem;
-    property Tributacao           : string read FTributacao           write FTributacao;
-    property Valor                : double read FValor                write FValor;
-    property valor_medio          : double read Fvalor_medio          write Fvalor_medio;
+    property Cest       : string  read FCest        write FCest;
+    property Ean        : string  read FEan         write FEan;
+    property ean_tipo   : string  read Fean_tipo    write Fean_tipo;
+    property link_foto  : string  read Flink_foto   write Flink_foto;
+    property Ncm        : Integer read FNcm         write FNcm;
+    property Nome       : string  read FNome        write FNome;
+    property nome_acento: string  read Fnome_acento write Fnome_acento;
+    property unid_abr   : string  read Funid_abr    write Funid_abr;
+    property unid_desc  : string  read Funid_desc   write Funid_desc;
+    property Categoria  : string  read FCategoria   write FCategoria;
+    property dh_update  : string  read Fdh_update   write Fdh_update;
+    property Marca      : string  read FMarca       write FMarca;
+    property Pais       : string  read FPais        write FPais;
   end;
 
 

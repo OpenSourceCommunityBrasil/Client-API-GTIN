@@ -17,30 +17,23 @@ object FrmGtin: TFrmGtin
   object Label5: TLabel
     Left = 16
     Top = 232
-    Width = 25
+    Width = 71
     Height = 21
-    Caption = 'ean'
+    Caption = 'EAN/GTIN'
   end
   object Label6: TLabel
-    Left = 160
-    Top = 232
-    Width = 40
+    Left = 16
+    Top = 280
+    Width = 43
     Height = 21
-    Caption = 'nome'
+    Caption = 'Nome'
   end
   object Label7: TLabel
-    Left = 304
+    Left = 170
     Top = 232
-    Width = 30
+    Width = 36
     Height = 21
-    Caption = 'ncm'
-  end
-  object Label8: TLabel
-    Left = 464
-    Top = 232
-    Width = 35
-    Height = 21
-    Caption = 'valor'
+    Caption = 'NCM'
   end
   object Label13: TLabel
     Left = 718
@@ -50,102 +43,46 @@ object FrmGtin: TFrmGtin
     Caption = 'link_foto'
   end
   object Label9: TLabel
-    Left = 464
-    Top = 296
-    Width = 28
+    Left = 315
+    Top = 424
+    Width = 27
     Height = 21
-    Caption = 'pais'
+    Caption = 'Pa'#237's'
   end
   object Label10: TLabel
-    Left = 304
-    Top = 296
+    Left = 16
+    Top = 376
     Width = 43
     Height = 21
-    Caption = 'marca'
-  end
-  object Label11: TLabel
-    Left = 160
-    Top = 296
-    Width = 15
-    Height = 21
-    Caption = 'ex'
-  end
-  object Label12: TLabel
-    Left = 16
-    Top = 296
-    Width = 25
-    Height = 21
-    Caption = 'avg'
+    Caption = 'Marca'
   end
   object Label14: TLabel
     Left = 16
-    Top = 360
-    Width = 64
+    Top = 424
+    Width = 67
     Height = 21
-    Caption = 'categoria'
-  end
-  object Label15: TLabel
-    Left = 160
-    Top = 360
-    Width = 83
-    Height = 21
-    Caption = 'valor m'#233'dio'
-  end
-  object Label16: TLabel
-    Left = 304
-    Top = 360
-    Width = 71
-    Height = 21
-    Caption = 'atualizado'
-  end
-  object Label18: TLabel
-    Left = 464
-    Top = 360
-    Width = 82
-    Height = 21
-    Caption = 'embalagem'
+    Caption = 'Categoria'
   end
   object Label17: TLabel
-    Left = 8
-    Top = 424
-    Width = 78
+    Left = 324
+    Top = 231
+    Width = 35
     Height = 21
-    Caption = 'cest c'#243'digo'
+    Caption = 'CEST'
   end
   object Label19: TLabel
-    Left = 160
-    Top = 424
-    Width = 70
-    Height = 21
-    Caption = 'dh update'
-  end
-  object Label20: TLabel
-    Left = 307
-    Top = 424
-    Width = 29
-    Height = 21
-    Caption = 'erro'
-  end
-  object Label21: TLabel
-    Left = 8
-    Top = 480
-    Width = 120
-    Height = 21
-    Caption = 'qtde. embalagem'
-  end
-  object Label22: TLabel
-    Left = 160
-    Top = 480
-    Width = 70
-    Height = 21
-    Caption = 'tributa'#231#227'o'
-  end
-  object Label23: TLabel
-    Left = 304
-    Top = 480
+    Left = 479
+    Top = 232
     Width = 106
     Height = 21
-    Caption = 'produto acento'
+    Caption = 'Ult. Atualiza'#231#227'o'
+  end
+  object Label23: TLabel
+    Left = 16
+    Top = 328
+    Width = 132
+    Height = 21
+    Caption = 'Nome Com Acento'
   end
   object img_produto: TImage
     Left = 718
@@ -8451,6 +8388,7 @@ object FrmGtin: TFrmGtin
       Top = 62
       Width = 170
       Height = 29
+      PasswordChar = '*'
       TabOrder = 1
       Text = 'Edit1'
       OnChange = edt_usuarioChange
@@ -8498,7 +8436,6 @@ object FrmGtin: TFrmGtin
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
-      ExplicitLeft = 816
       ExplicitHeight = 21
     end
     object Image1: TImage
@@ -9055,9 +8992,9 @@ object FrmGtin: TFrmGtin
     Text = 'Edit1'
   end
   object edt_nome: TEdit
-    Left = 160
-    Top = 253
-    Width = 121
+    Left = 16
+    Top = 301
+    Width = 584
     Height = 23
     BorderStyle = bsNone
     Font.Charset = DEFAULT_CHARSET
@@ -9070,7 +9007,7 @@ object FrmGtin: TFrmGtin
     Text = 'Edit1'
   end
   object edt_ncm: TEdit
-    Left = 304
+    Left = 170
     Top = 253
     Width = 121
     Height = 23
@@ -9082,21 +9019,6 @@ object FrmGtin: TFrmGtin
     Font.Style = []
     ParentFont = False
     TabOrder = 5
-    Text = 'Edit1'
-  end
-  object edt_valor: TEdit
-    Left = 464
-    Top = 253
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 6
     Text = 'Edit1'
   end
   object edt_link_foto: TEdit
@@ -9111,13 +9033,28 @@ object FrmGtin: TFrmGtin
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
     Text = 'Edit1'
   end
   object edt_pais: TEdit
-    Left = 464
-    Top = 317
-    Width = 121
+    Left = 315
+    Top = 445
+    Width = 285
+    Height = 23
+    BorderStyle = bsNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clTeal
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 7
+    Text = 'Edit1'
+  end
+  object edt_marca: TEdit
+    Left = 16
+    Top = 397
+    Width = 584
     Height = 23
     BorderStyle = bsNone
     Font.Charset = DEFAULT_CHARSET
@@ -9129,10 +9066,10 @@ object FrmGtin: TFrmGtin
     TabOrder = 8
     Text = 'Edit1'
   end
-  object edt_marca: TEdit
-    Left = 304
-    Top = 317
-    Width = 121
+  object edt_categoria: TEdit
+    Left = 16
+    Top = 445
+    Width = 285
     Height = 23
     BorderStyle = bsNone
     Font.Charset = DEFAULT_CHARSET
@@ -9144,9 +9081,9 @@ object FrmGtin: TFrmGtin
     TabOrder = 9
     Text = 'Edit1'
   end
-  object edt_ex: TEdit
-    Left = 160
-    Top = 317
+  object edt_cest_codigo: TEdit
+    Left = 324
+    Top = 253
     Width = 121
     Height = 23
     BorderStyle = bsNone
@@ -9159,9 +9096,9 @@ object FrmGtin: TFrmGtin
     TabOrder = 10
     Text = 'Edit1'
   end
-  object edt_avg: TEdit
-    Left = 16
-    Top = 317
+  object edt_dh_update: TEdit
+    Left = 479
+    Top = 253
     Width = 121
     Height = 23
     BorderStyle = bsNone
@@ -9174,10 +9111,10 @@ object FrmGtin: TFrmGtin
     TabOrder = 11
     Text = 'Edit1'
   end
-  object edt_categoria: TEdit
+  object edt_produto_acento: TEdit
     Left = 16
-    Top = 381
-    Width = 121
+    Top = 349
+    Width = 584
     Height = 23
     BorderStyle = bsNone
     Font.Charset = DEFAULT_CHARSET
@@ -9187,141 +9124,6 @@ object FrmGtin: TFrmGtin
     Font.Style = []
     ParentFont = False
     TabOrder = 12
-    Text = 'Edit1'
-  end
-  object edt_valor_medio: TEdit
-    Left = 160
-    Top = 381
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 13
-    Text = 'Edit1'
-  end
-  object edt_atualizado: TEdit
-    Left = 304
-    Top = 381
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 14
-    Text = 'Edit1'
-  end
-  object edt_embalagem: TEdit
-    Left = 464
-    Top = 381
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 15
-    Text = 'Edit1'
-  end
-  object edt_cest_codigo: TEdit
-    Left = 16
-    Top = 445
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 16
-    Text = 'Edit1'
-  end
-  object edt_dh_update: TEdit
-    Left = 160
-    Top = 445
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 17
-    Text = 'Edit1'
-  end
-  object edt_erro: TEdit
-    Left = 304
-    Top = 445
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 18
-    Text = 'Edit1'
-  end
-  object edt_quantidade_embalagem: TEdit
-    Left = 16
-    Top = 501
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 19
-    Text = 'Edit1'
-  end
-  object edt_tributacao: TEdit
-    Left = 160
-    Top = 501
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 20
-    Text = 'Edit1'
-  end
-  object edt_produto_acento: TEdit
-    Left = 304
-    Top = 501
-    Width = 121
-    Height = 23
-    BorderStyle = bsNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 21
     Text = 'Edit1'
   end
 end

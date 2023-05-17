@@ -75,36 +75,18 @@ type
     edt_nome: TEdit;
     Label7: TLabel;
     edt_ncm: TEdit;
-    Label8: TLabel;
-    edt_valor: TEdit;
     Label13: TLabel;
     edt_link_foto: TEdit;
     Label9: TLabel;
     edt_pais: TEdit;
     Label10: TLabel;
     edt_marca: TEdit;
-    Label11: TLabel;
-    edt_ex: TEdit;
-    Label12: TLabel;
-    edt_avg: TEdit;
     Label14: TLabel;
     edt_categoria: TEdit;
-    Label15: TLabel;
-    edt_valor_medio: TEdit;
-    Label16: TLabel;
-    edt_atualizado: TEdit;
-    Label18: TLabel;
-    edt_embalagem: TEdit;
     Label17: TLabel;
     edt_cest_codigo: TEdit;
     Label19: TLabel;
     edt_dh_update: TEdit;
-    Label20: TLabel;
-    edt_erro: TEdit;
-    Label21: TLabel;
-    edt_quantidade_embalagem: TEdit;
-    Label22: TLabel;
-    edt_tributacao: TEdit;
     Label23: TLabel;
     edt_produto_acento: TEdit;
     img_produto: TImage;
@@ -120,6 +102,7 @@ type
   private
     Ftoken: TToken;
     FProduto : TProduto;
+    FImgDefault : TImage;
     { Private declarations }
     procedure LimparCampos;
 
@@ -155,16 +138,21 @@ end;
 
 procedure TFrmGtin.FormCreate(Sender: TObject);
 begin
+  FImgDefault := TImage.Create(nil);
+  FImgDefault.Picture :=  img_produto.Picture;
+
   LimparCampos;
 end;
 
 procedure TFrmGtin.FormDestroy(Sender: TObject);
 begin
-  if Ftoken <> nil then
+  FImgDefault.Free;
+
+  if Assigned(Ftoken) then
     Ftoken.Free;
 
-  if FProduto <> nil then
-    FProduto.Free;
+  if Assigned(FProduto) then
+    FProduto.DisposeOf;
 end;
 
 procedure TFrmGtin.FormShow(Sender: TObject);
@@ -249,10 +237,10 @@ begin
             if (Stream.Size <> 0) then
               begin
                 Stream.Position := 0;
-                Retorno     := UTF8ToWideString(RawByteString(Stream.DataString));
+                Retorno     := Stream.DataString;
 
-                if FProduto <> nil then
-                  FProduto.Free;
+                if Assigned(FProduto) then
+                  FreeAndNil(FProduto);
 
                 FProduto  := TJson.JsonToObject<TProduto>(Retorno);
               end;
@@ -262,32 +250,23 @@ begin
                 edt_ean.Text                    :=  FProduto.ean;
                 edt_nome.Text                   :=  FProduto.nome;
                 edt_ncm.Text                    :=  FProduto.ncm.ToString;
-                edt_valor.Text                  :=  FProduto.valor.ToString;
-                edt_avg.Text                    :=  FProduto.avg.ToString;
-                edt_ex.Text                     :=  FProduto.ex.ToString;
                 edt_marca.Text                  :=  FProduto.marca;
                 edt_pais.Text                   :=  FProduto.pais;
                 edt_categoria.Text              :=  FProduto.categoria;
-                edt_valor_medio.Text            :=  FProduto.valor_medio.ToString;
-                edt_atualizado.Text             :=  FProduto.atualizado.ToString;
                 edt_link_foto.Text              :=  FProduto.link_foto;
-                edt_cest_codigo.Text            :=  FProduto.cest_codigo;
+                edt_cest_codigo.Text            :=  FProduto.Cest;
                 edt_dh_update.Text              :=  FProduto.dh_update;
-                edt_erro.Text                   :=  FProduto.erro.ToString;
-                edt_embalagem.Text              :=  FProduto.embalagem;
-                edt_quantidade_embalagem.Text   :=  FProduto.quantidade_embalagem.ToString;
-                edt_tributacao.Text             :=  FProduto.tributacao;
-                edt_produto_acento.Text         :=  FProduto.produto_acento;
+                edt_produto_acento.Text         :=  FProduto.nome_acento;
               end;
           end;
       else
-        if FProduto <> nil then
-          FProduto.Free;
+        if Assigned(FProduto) then
+          FreeAndNil(FProduto);
       end;
     except on E: Exception do
       begin
-        if FProduto <> nil then
-          FProduto.Free;
+        if Assigned(FProduto) then
+          FreeAndNil(FProduto);
         MessageDlg(e.message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
       end;
     end;
@@ -323,13 +302,11 @@ var
   Strm: TStringStream;
   vIdHTTP : TIdHTTP;
   retorno : string;
-  raw : TStringList;
 begin
   Result :=  True;
   Screen.Cursor := crHourGlass;
   Strm := TStringStream.Create('', TEncoding.UTF8);
   vIdHTTP := TIdHTTP.Create(nil);
-  raw := TStringList.Create;
   try
     try
       vIdHTTP.Request.CustomHeaders.Clear;
@@ -337,26 +314,24 @@ begin
       vIdHTTP.Request.CustomHeaders.AddValue('password', Trim(edt_senha.Text));
       vIdHTTP.Request.BasicAuthentication :=  False;
       retorno  :=  vIdHTTP.Post(ENDPOINT_GETTOKEN, Strm);
-      raw.Text  :=  vIdHTTP.Response.RawHeaders.Text;
       case vIdHTTP.ResponseCode  of
         200:
           begin
-            if Ftoken <> nil then
+            if Assigned(Ftoken) then
               Ftoken.Free;
             Ftoken  := TJson.JsonToObject<TToken>(Retorno);
           end;
       else
-        if Ftoken <> nil then
+        if Assigned(Ftoken) then
           Ftoken.Free;
         Result :=  False;
         MessageDlg(UTF8ToWideString(RawByteString(Strm.DataString)), TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
       end;
     except on E: Exception do
       begin
-        raw.Text  :=  vIdHTTP.Response.RawHeaders.Text;
-        if Ftoken <> nil then
-          Ftoken.Free;
         Result :=  False;
+        if Assigned(Ftoken) then
+          Ftoken.Free;
         MessageDlg(e.Message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
       end;
     end;
@@ -364,7 +339,6 @@ begin
     Strm.Free;
     vIdHTTP.Free;
     Screen.Cursor := crDefault;
-    raw.Free;
   end;
 end;
 
@@ -393,6 +367,7 @@ procedure TFrmGtin.LimparCampos;
 var
   C: Integer;
 begin
+  img_produto.Picture :=  FImgDefault.Picture;
   for C := 0 to Self.ComponentCount - 1 do
   begin
     if Self.Components[C] is TEdit then
