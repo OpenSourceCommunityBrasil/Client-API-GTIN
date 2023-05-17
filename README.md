@@ -101,17 +101,17 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
                             <p class="card-text">Media type: <strong>application/json</strong></p>
                             <pre><code>{
     "ean": "7896116900029",
-    "ean_tipo": "",
+    "ean_tipo": "EAN13",
     "cest": "",
     "ncm": 7133399,
     "nome": "FEIJAO CARIOCA KICALDO T1 1KG",
-    "nome_acento": "",
-    "unid_abr": "",
-    "unid_desc": "",
-    "marca": null,
-    "pais": null,
-    "categoria": null,
-    "dh_update": null,
+    "nome_acento": "FEIJÃO CARIOCA TIPO 1 KICALDO PACOTE 1KG",
+    "unid_abr": "KG",
+    "unid_desc": "QUILOGRAMA",
+    "marca": "KICALDO",
+    "pais": "BRASIL",
+    "categoria": "Carioca",
+    "dh_update": "16/05/2023 22:06:29",
     "link_foto": "https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029"
 }</code></pre>
                         </div>
@@ -161,17 +161,17 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
                             <p class="card-text">Media type: <strong>application/json</strong></p>
                             <pre><code>{
     "ean": "7896116900029",
-    "ean_tipo": "",
+    "ean_tipo": "EAN13",
     "cest": "",
     "ncm": 7133399,
     "nome": "FEIJAO CARIOCA KICALDO T1 1KG",
-    "nome_acento": "",
-    "unid_abr": "",
-    "unid_desc": "",
-    "marca": null,
-    "pais": null,
-    "categoria": null,
-    "dh_update": null,
+    "nome_acento": "FEIJÃO CARIOCA TIPO 1 KICALDO PACOTE 1KG",
+    "unid_abr": "KG",
+    "unid_desc": "QUILOGRAMA",
+    "marca": "KICALDO",
+    "pais": "BRASIL",
+    "categoria": "Carioca",
+    "dh_update": "16/05/2023 22:06:29",
     "link_foto": "https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029"
 }</code></pre>
                         </div>
