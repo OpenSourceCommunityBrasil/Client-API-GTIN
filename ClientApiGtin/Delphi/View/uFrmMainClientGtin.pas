@@ -41,7 +41,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, dxGDIPlusClasses, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
+  Vcl.Buttons, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
 
   , uClientGtin.Classes
   , uClientGtin.Consts
