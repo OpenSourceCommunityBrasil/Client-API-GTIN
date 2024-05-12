@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="ClientGtin.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="21"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="View.FrmMain"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="183"/>
+        <CursorPos X="16" Y="194"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Controller.Gtin"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="111"/>
+        <CursorPos X="19" Y="49"/>
+        <FoldState Value=" T3id6Qn"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\Lazarus\fpc\3.2.2\source\packages\fcl-json\src\fpjson.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="117"/>
+        <CursorPos X="30" Y="149"/>
+        <UsageCount Value="10"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="116" Column="79" TopLine="72"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="119" Column="19" TopLine="72"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="122" Column="104" TopLine="116"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="124" Column="107" TopLine="114"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="131" TopLine="114"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="121" Column="77" TopLine="73"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="146" Column="41" TopLine="135"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="135" Column="27" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="161" Column="24" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="76" Column="32" TopLine="61"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="142" Column="47" TopLine="130"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="76" Column="69" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="161" Column="24" TopLine="141"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="140" Column="3" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="139" Column="9" TopLine="127"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="76" Column="66" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="141" Column="34" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="139" Column="23" TopLine="132"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="162" Column="21" TopLine="132"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="149" Column="38" TopLine="132"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="153" Column="39" TopLine="136"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\Controller\controller.gtin.pas"/>
+        <Caret Line="45" Column="20" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="137" Column="33" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="167" Column="52" TopLine="148"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="99" Column="25" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="151" Column="16" TopLine="131"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="197" Column="4" TopLine="178"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="183" Column="41" TopLine="177"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="186" Column="77" TopLine="177"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Source\View\view.frmmain.pas"/>
+        <Caret Line="188" Column="77" TopLine="179"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

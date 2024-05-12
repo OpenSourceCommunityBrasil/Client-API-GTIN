@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="D:\Lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1482330472"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -gw2 -godwarfsets -gl -WG -l -vewnhibq -FiD:\0_ProjetosLazarus\0_Demos\GtinRSC\Projeto\lib\x86_64-win64 -FuD:\0_ProjetosLazarus\0_Demos\GtinRSC\Source\View -FuD:\0_ProjetosLazarus\0_Demos\GtinRSC\Source\Controller -FuD:\Lazarus\lcl\units\x86_64-win64\win32 -FuD:\Lazarus\lcl\units\x86_64-win64 -FuD:\Lazarus\components\freetype\lib\x86_64-win64 -FuD:\Lazarus\components\lazutils\lib\x86_64-win64 -FuD:\Lazarus\packager\units\x86_64-win64 -FuD:\0_ProjetosLazarus\0_Demos\GtinRSC\Projeto\ -FUD:\0_ProjetosLazarus\0_Demos\GtinRSC\Projeto\lib\x86_64-win64\ -FED:\0_ProjetosLazarus\0_Demos\GtinRSC\Projeto\ -oD:\0_ProjetosLazarus\0_Demos\GtinRSC\Projeto\ClientGtin.exe -dLCL -dLCLwin32 ClientGtin.lpr"/>
+</CONFIG>
