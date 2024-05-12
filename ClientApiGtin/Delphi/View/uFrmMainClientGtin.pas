@@ -44,14 +44,15 @@ uses
   Vcl.Buttons, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
 
   , uClientGtin.Classes
-  , uClientGtin.Consts
-
-  , IdHTTP
+  , Controller.Gtin 
 
   , REST.Json
+  , System.JSON
 
 
   ;
+
+
 
 type
   TFrmGtin = class(TForm)
@@ -92,6 +93,8 @@ type
     img_produto: TImage;
     Image1: TImage;
     Image2: TImage;
+    mm_Token: TMemo;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -99,6 +102,7 @@ type
     procedure edt_usuarioChange(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     Ftoken: TToken;
     FProduto : TProduto;
@@ -106,14 +110,12 @@ type
     { Private declarations }
     procedure LimparCampos;
 
-    function obterToken: Boolean;
-
     procedure GetInforEan;
     procedure GetFotoProduto;
 
   public
     { Public declarations }
-  end;
+  end;    
 
 var
   FrmGtin: TFrmGtin;
@@ -127,6 +129,11 @@ implementation
 { TForm2 }
 
 
+
+procedure TFrmGtin.Button1Click(Sender: TObject);
+begin
+  mm_Token.Text :=  TControllerGtin.GetToken(Trim(edt_usuario.Text), Trim(edt_senha.Text));
+end;
 
 procedure TFrmGtin.edt_usuarioChange(Sender: TObject);
 begin
@@ -159,120 +166,57 @@ procedure TFrmGtin.FormShow(Sender: TObject);
 begin
   sELF.Caption      :=  TITLE;
   lblTitle.Caption  := Self.Caption;
-  lblversao.Caption :=  'Versão API: ' + VERSAO_API  + ' - Versão Cliente: '  + VERSÃO_DEMO ;
+  lblversao.Caption :=  'Versão API: ' + VERSAO_API  + ' - Versão Cliente: '  + VERSAO_DEMO ;
 
   edt_pesquisa_ean.Text :=  '7891222216644';
 
-  edt_usuario.Text  :=  'Usuário';
-  edt_senha.Text    :=  'Senha';
+  edt_usuario.Text  :=  'eliana';//  'Usuário';
+  edt_senha.Text    :=  '131825';//  'Senha';
 end;
 
 procedure TFrmGtin.GetFotoProduto;
 var
-  sURL    : String ;
   Strm    : TMemoryStream;
-  vIdHTTP : TIdHTTP;
 begin
-  if (not obterToken) then
+  if (mm_Token.Text = '') then
     Exit;
 
   Screen.Cursor := crHourGlass;
-  Strm := TMemoryStream.Create;
-  vIdHTTP := TIdHTTP.Create(nil);
+  Strm  :=  TMemoryStream.Create;
   try
-    sURL := ENDPOINT_IMG;
-    sURL := StringReplace(sURL, '{id}', edt_pesquisa_ean.Text, [rfReplaceAll]);
-
-    try
-      vIdHTTP.Request.BasicAuthentication :=  False;
-      vIdHTTP.Request.CustomHeaders.Clear;
-      vIdHTTP.Request.CustomHeaders.AddValue('Authorization','Bearer ' + Ftoken.token);
-      vIdHTTP.Get(sURL, Strm);
-      if (Strm.Size <> 0) then
+    if TControllerGtin.GetGTINImagem(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), Strm) then
       begin
-        Strm.Position := 0;
         img_produto.Picture.LoadFromStream(Strm);
       end;
-    except on E: Exception do
-      begin
-        MessageDlg(e.message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
-      end;
-    end;
   finally
     Strm.Free;
-    vIdHTTP.Free;
     Screen.Cursor := crDefault;
   end;
 end;
 
 procedure TFrmGtin.GetInforEan;
 var
-  sURL        : String ;
   retorno     : string;
-  nResp       : Integer ;
-  Stream      : TStringStream ;
-  vIdHTTP     : TIdHTTP;
-
 begin
-  if (not obterToken) then
+  if (mm_Token.Text = '') then
     Exit;
-
-  sURL := ENDPOINT_INFOR;
-
   Screen.Cursor := crHourGlass;
-  Stream  := TStringStream.Create('', TEncoding.UTF8);
-  vIdHTTP := TIdHTTP.Create(nil);
   try
-    try
-      sURL := StringReplace(sURL, '{id}', edt_pesquisa_ean.Text, [rfReplaceAll]);
+    retorno :=  TControllerGtin.GetGTINInfo(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text));
 
-      vIdHTTP.Request.BasicAuthentication :=  False;
-      vIdHTTP.Request.CustomHeaders.Clear;
-      vIdHTTP.Request.CustomHeaders.AddValue('Authorization','Bearer ' + Ftoken.token);
-      vIdHTTP.Get(sURL, Stream);
+    FProduto  := TJson.JsonToObject<TProduto>(Retorno);
 
-      case vIdHTTP.ResponseCode  of
-        200:
-          begin
-            if (Stream.Size <> 0) then
-              begin
-                Stream.Position := 0;
-                Retorno     := Stream.DataString;
-
-                if Assigned(FProduto) then
-                  FreeAndNil(FProduto);
-
-                FProduto  := TJson.JsonToObject<TProduto>(Retorno);
-              end;
-
-            if FProduto <> nil then
-              begin
-                edt_ean.Text                    :=  FProduto.ean;
-                edt_nome.Text                   :=  FProduto.nome;
-                edt_ncm.Text                    :=  FProduto.ncm.ToString;
-                edt_marca.Text                  :=  FProduto.marca;
-                edt_pais.Text                   :=  FProduto.pais;
-                edt_categoria.Text              :=  FProduto.categoria;
-                edt_link_foto.Text              :=  FProduto.link_foto;
-                edt_cest_codigo.Text            :=  FProduto.Cest;
-                edt_dh_update.Text              :=  FProduto.dh_update;
-                edt_produto_acento.Text         :=  FProduto.nome_acento;
-              end;
-          end;
-      else
-        if Assigned(FProduto) then
-          FreeAndNil(FProduto);
-      end;
-    except on E: Exception do
-      begin
-        if Assigned(FProduto) then
-          FreeAndNil(FProduto);
-        MessageDlg(e.message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
-      end;
-    end;
+    edt_ean.Text                    :=  FProduto.ean;
+    edt_nome.Text                   :=  FProduto.nome;
+    edt_ncm.Text                    :=  FProduto.ncm.ToString;
+    edt_marca.Text                  :=  FProduto.marca;
+    edt_pais.Text                   :=  FProduto.pais;
+    edt_categoria.Text              :=  FProduto.categoria;
+    edt_link_foto.Text              :=  FProduto.link_foto;
+    edt_cest_codigo.Text            :=  FProduto.Cest;
+    edt_dh_update.Text              :=  FProduto.dh_update;
+    edt_produto_acento.Text         :=  FProduto.nome_acento;  
   finally
-    Stream.Free;
-    vIdHTTP.Free;
     Screen.Cursor := crDefault;
   end;
 end;
@@ -291,55 +235,10 @@ procedure TFrmGtin.Image2Click(Sender: TObject);
 begin
   ShellExecute(Handle,
                'open',
-               'https://oscbr.com.br/gtinmain',
+               'https://gtin.rscsistemas.com.br',
                nil,
                nil,
                SW_SHOWMAXIMIZED);
-end;
-
-function TFrmGtin.obterToken: Boolean;
-var
-  Strm: TStringStream;
-  vIdHTTP : TIdHTTP;
-  retorno : string;
-begin
-  Result :=  True;
-  Screen.Cursor := crHourGlass;
-  Strm := TStringStream.Create('', TEncoding.UTF8);
-  vIdHTTP := TIdHTTP.Create(nil);
-  try
-    try
-      vIdHTTP.Request.CustomHeaders.Clear;
-      vIdHTTP.Request.CustomHeaders.AddValue('username', Trim(edt_usuario.Text));
-      vIdHTTP.Request.CustomHeaders.AddValue('password', Trim(edt_senha.Text));
-      vIdHTTP.Request.BasicAuthentication :=  False;
-      retorno  :=  vIdHTTP.Post(ENDPOINT_GETTOKEN, Strm);
-      case vIdHTTP.ResponseCode  of
-        200:
-          begin
-            if Assigned(Ftoken) then
-              Ftoken.Free;
-            Ftoken  := TJson.JsonToObject<TToken>(Retorno);
-          end;
-      else
-        if Assigned(Ftoken) then
-          Ftoken.Free;
-        Result :=  False;
-        MessageDlg(UTF8ToWideString(RawByteString(Strm.DataString)), TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
-      end;
-    except on E: Exception do
-      begin
-        Result :=  False;
-        if Assigned(Ftoken) then
-          Ftoken.Free;
-        MessageDlg(e.Message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
-      end;
-    end;
-  finally
-    Strm.Free;
-    vIdHTTP.Free;
-    Screen.Cursor := crDefault;
-  end;
 end;
 
 procedure TFrmGtin.sbtn_pesquisar_eanClick(Sender: TObject);

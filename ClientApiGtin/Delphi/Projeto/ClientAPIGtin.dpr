@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   uFrmMainClientGtin in '..\View\uFrmMainClientGtin.pas' {FrmGtin},
   uClientGtin.Classes in '..\Classes\uClientGtin.Classes.pas',
-  uClientGtin.Consts in '..\Consts\uClientGtin.Consts.pas';
+  Controller.Gtin in '..\Controller\Controller.Gtin.pas';
 
 {$R *.res}
 
