@@ -41,12 +41,19 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
+  Vcl.Buttons, vcl.Imaging.jpeg, Winapi.ShellAPI
 
-  , Controller.Gtin 
+  , Controller.Gtin
 
   , REST.Json
   , System.JSON
+
+  {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
+  , Vcl.Imaging.pngimage
+  {$ELSE}
+  , Vcl.Imaging.pngimage    // sem suporte para png comente essa linha
+  {$IFEND}
+
 
 
   ;
@@ -171,6 +178,11 @@ end;
 procedure TFrmGtin.GetFotoProduto;
 var
   Strm    : TMemoryStream;
+{$IF CompilerVersion >= 20.0} // Delphi 2009 and later
+  Png: TPngImage;
+{$ELSE}
+  //sem suporte para png
+{$IFEND}
 begin
   if (mm_Token.Text = '') then
     Exit;
@@ -180,7 +192,18 @@ begin
   try
     if TControllerGtin.GetGTINImagem(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), Strm) then
       begin
-        img_produto.Picture.LoadFromStream(Strm);
+        {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
+          Png := TPngImage.Create;
+          try
+            Png.LoadFromStream(Strm);
+            img_produto.Picture.Assign(Png);
+          finally
+            Png.Free;
+          end;
+        {$ELSE}
+          raise Exception.Create('Abaixo do delphi 2009 não a suporte nativo para imagem png');
+        {$IFEND}
+
       end;
   finally
     Strm.Free;
