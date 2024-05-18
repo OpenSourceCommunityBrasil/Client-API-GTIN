@@ -156,8 +156,6 @@ object FrmGtin: TFrmGtin
       Margins.Bottom = 5
       Align = alRight
       TabOrder = 2
-      ExplicitLeft = 432
-      ExplicitHeight = 89
     end
     object Button1: TButton
       Left = 368

@@ -113,7 +113,6 @@
             <Form>FrmGtin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Classes\uClientGtin.Classes.pas"/>
         <DCCReference Include="..\Controller\Controller.Gtin.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

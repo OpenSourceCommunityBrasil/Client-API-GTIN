@@ -43,7 +43,6 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Buttons, vcl.Imaging.pngimage, vcl.Imaging.jpeg, Winapi.ShellAPI
 
-  , uClientGtin.Classes
   , Controller.Gtin 
 
   , REST.Json
@@ -104,8 +103,6 @@ type
     procedure Image2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
-    Ftoken: TToken;
-    FProduto : TProduto;
     FImgDefault : TImage;
     { Private declarations }
     procedure LimparCampos;
@@ -131,8 +128,11 @@ implementation
 
 
 procedure TFrmGtin.Button1Click(Sender: TObject);
+var
+  stoken: string;
 begin
-  mm_Token.Text :=  TControllerGtin.GetToken(Trim(edt_usuario.Text), Trim(edt_senha.Text));
+  if TControllerGtin.GetToken(Trim(edt_usuario.Text), Trim(edt_senha.Text), stoken) then
+    mm_Token.Text :=  stoken;
 end;
 
 procedure TFrmGtin.edt_usuarioChange(Sender: TObject);
@@ -154,12 +154,6 @@ end;
 procedure TFrmGtin.FormDestroy(Sender: TObject);
 begin
   FImgDefault.Free;
-
-  if Assigned(Ftoken) then
-    Ftoken.Free;
-
-  if Assigned(FProduto) then
-    FProduto.DisposeOf;
 end;
 
 procedure TFrmGtin.FormShow(Sender: TObject);
@@ -170,8 +164,8 @@ begin
 
   edt_pesquisa_ean.Text :=  '7891222216644';
 
-  edt_usuario.Text  :=  'eliana';//  'Usuário';
-  edt_senha.Text    :=  '131825';//  'Senha';
+  edt_usuario.Text  :=  'Usuário';
+  edt_senha.Text    :=  'Senha';
 end;
 
 procedure TFrmGtin.GetFotoProduto;
@@ -197,25 +191,30 @@ end;
 procedure TFrmGtin.GetInforEan;
 var
   retorno     : string;
+  ProdJson: TJSONObject;
 begin
   if (mm_Token.Text = '') then
     Exit;
   Screen.Cursor := crHourGlass;
   try
-    retorno :=  TControllerGtin.GetGTINInfo(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text));
+    if not TControllerGtin.GetGTINInfo(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), retorno) then
+      Exit;
 
-    FProduto  := TJson.JsonToObject<TProduto>(Retorno);
-
-    edt_ean.Text                    :=  FProduto.ean;
-    edt_nome.Text                   :=  FProduto.nome;
-    edt_ncm.Text                    :=  FProduto.ncm.ToString;
-    edt_marca.Text                  :=  FProduto.marca;
-    edt_pais.Text                   :=  FProduto.pais;
-    edt_categoria.Text              :=  FProduto.categoria;
-    edt_link_foto.Text              :=  FProduto.link_foto;
-    edt_cest_codigo.Text            :=  FProduto.Cest;
-    edt_dh_update.Text              :=  FProduto.dh_update;
-    edt_produto_acento.Text         :=  FProduto.nome_acento;  
+    ProdJson  :=  TJSONObject.ParseJSONValue(retorno) as TJSONObject;
+    try
+      edt_ean.Text                    :=  ProdJson.GetValue<string>('ean');
+      edt_nome.Text                   :=  ProdJson.GetValue<string>('nome');
+      edt_ncm.Text                    :=  ProdJson.GetValue<string>('ncm');
+      edt_marca.Text                  :=  ProdJson.GetValue<string>('marca');
+      edt_pais.Text                   :=  ProdJson.GetValue<string>('pais');
+      edt_categoria.Text              :=  ProdJson.GetValue<string>('categoria');
+      edt_link_foto.Text              :=  ProdJson.GetValue<string>('link_foto');
+      edt_cest_codigo.Text            :=  ProdJson.GetValue<string>('cest');
+      edt_dh_update.Text              :=  ProdJson.GetValue<string>('dh_update');
+      edt_produto_acento.Text         :=  ProdJson.GetValue<string>('nome_acento');
+    finally
+      ProdJson.Free;
+    end;
   finally
     Screen.Cursor := crDefault;
   end;

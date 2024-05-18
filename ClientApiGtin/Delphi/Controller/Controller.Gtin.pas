@@ -37,8 +37,8 @@ type
 
   TControllerGtin = class
     public
-      class function GetToken(const Username, Password: string): string;
-      class function GetGTINInfo(const GTIN, AccessToken: string): string;
+      class function GetToken(const Username, Password: string; out token: string): Boolean;
+      class function GetGTINInfo(const GTIN, AccessToken: string; out Infor: string): Boolean;
       class function GetGTINImagem(const GTIN, AccessToken: string; out Imagem: TMemoryStream): Boolean;
 
   end;
@@ -48,7 +48,7 @@ implementation
 { TControllerGtin }
 
 class function TControllerGtin.GetToken(const Username,
-  Password: string): string;
+  Password: string; out token: string): Boolean;
 var
   HTTPClient: TIdHTTP;
   AuthHeader: string;
@@ -56,6 +56,7 @@ var
   Response: string;
   JSONData: TJSONObject;
 begin
+  Result  :=  False;
 
   Stream      :=  TStringStream.Create;
   HTTPClient  :=  TIdHTTP.Create(nil);
@@ -89,13 +90,14 @@ begin
             JSONData := TJSONObject.ParseJSONValue(Response) as TJSONObject;
             try
               // Retornando apenas o token
-              Result := JSONData.GetValue<string>('token');
+              token := JSONData.GetValue<string>('token');
+              Result  :=  True;
             finally
               JSONData.Free;
             end;
           end
       else
-        Result  :=  Response;
+        //tratar retorno em caso de erro
       end;
 
     Except
@@ -105,17 +107,20 @@ begin
          Begin
           If E.ErrorMessage <> '' Then
             begin
-              Result  :=  E.ErrorMessage;
+//              Result  :=  E.ErrorMessage;
+              //tratar retorno em caso de erro
             end
           Else
             begin
-              Result  :=  E.Message;
+//              Result  :=  E.Message;
+              //tratar retorno em caso de erro
             end;
          End;
        End;
       on E: Exception do
         begin
-          Result  :=  E.Message;
+//          Result  :=  E.Message;
+          //tratar retorno em caso de erro
         end;
     end;
   finally
@@ -126,12 +131,14 @@ begin
 end;
 
 class function TControllerGtin.GetGTINInfo(const GTIN,
-  AccessToken: string): string;
+  AccessToken: string; out Infor: string): Boolean;
 var
   sURL        : String ;
   Stream      : TStringStream ;
   vIdHTTP     : TIdHTTP;
 begin
+  Result  :=  False;
+  Infor   :=  '';
 
   sURL := StringReplace(INFOR_CONSULTAR, '{gtin}', GTIN, [rfReplaceAll]);
 
@@ -148,7 +155,8 @@ begin
       vIdHTTP.Request.BasicAuthentication:= False;
       vIdHTTP.Request.CustomHeaders.AddValue('Authorization','Bearer ' + AccessToken);
 
-      Result :=  vIdHTTP.Get(sURL);
+      Infor :=  vIdHTTP.Get(sURL);
+      Result  :=  True;
 
     Except
       On E: EIdHTTPProtocolException do
@@ -157,17 +165,20 @@ begin
          Begin
           If E.ErrorMessage <> '' Then
             begin
-              Result  :=  E.ErrorMessage;
+//              Result  :=  E.ErrorMessage;
+              //tratar retorno em caso de erro
             end
           Else
             begin
-              Result  :=  E.Message;
+//              Result  :=  E.Message;
+              //tratar retorno em caso de erro
             end;
          End;
        End;
       on E: Exception do
         begin
-          Result  :=  E.Message;
+//          Result  :=  E.Message;
+          //tratar retorno em caso de erro
         end;
     end;
   finally
