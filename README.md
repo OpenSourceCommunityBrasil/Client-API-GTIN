@@ -2,10 +2,10 @@
 
 ### OSCBR - Open Source Community Brasil
 
-Site: https://oscbr.com.br/gtinmain
+Site: https://gtin.rscsistemas.com.br
 
 ### Para fazer uso da API GTIN precisará de um usuário e senha, caso ainda não tenha feito poderá esta fazendo seu cadastro acesssando o link abaixo:
-Cadastre-se: https://oscbr.com.br/gtincadastro
+Cadastre-se: https://gtin.rscsistemas.com.br/cadastro
 
 <main class="flex-shrink-0">
     <div class="container">
@@ -37,10 +37,10 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
             <div class="row">
                 <div class="col">
                     <div class="card" style="background-color: aliceblue !important;">
-                        <div class="card-header"><strong>/gettoken</strong></div>
+                        <div class="card-header"><strong>/oauth/token</strong></div>
                         <div class="card-body">
                             <p class="card-text">Endpoint de solicitação do token Bearer de acesso.</p>
-                            <p class="card-text">URL: https://oscbr.com.br:9092/gettoken</p>
+                            <p class="card-text">URL: https://gtin.rscsistemas.com.br/oauth/token</p>
                         </div>
                         <div class="card-header"><strong>Paramêtros</strong></div>
                         <div class="card-body">
@@ -82,10 +82,10 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
             <div class="row">
                 <div class="col">
                     <div class="card" style="background-color: aliceblue !important;">
-                        <div class="card-header"> <strong>/api/gtin/infor?gtin={gtin}</strong></div>
+                        <div class="card-header"> <strong>/api/gtin/infor/:gtin</strong></div>
                         <div class="card-body">
                             <p class="card-text">Endpoint de solicitação das informações de um determinado produto atravez do seu EAN/GTIN.</p>
-                            <p class="card-text">URL: https://oscbr.com.br:9092/api/gtin/infor?gtin={gtin}</p>
+                            <p class="card-text">URL: https://gtin.rscsistemas.com.br/api/gtin/infor/:gtin</p>
                         </div>
                         <div class="card-header"><strong>Paramêtros</strong></div>
                         <div class="card-body">
@@ -112,7 +112,7 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
     "pais": "BRASIL",
     "categoria": "Carioca",
     "dh_update": "16/05/2023 22:06:29",
-    "link_foto": "https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029"
+    "link_foto": "https://gtin.rscsistemas.com.br/api/gtin/img/7896116900029"
 }</code></pre>
                         </div>
                         <div class="card-body">
@@ -137,66 +137,7 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
     "link_foto": "405"
 }</code></pre>
                         </div>
-                        <div class="card-header"><strong>/api/gtin/infor?gtin={gtin}&200=s</strong></div>
-                        <div class="card-body">
-                            <p class="card-text">Endpoint de solicitação das informações de um determinado produto atravez do seu EAN/GTIN.</p>
-                            <p class="card-text">O paramêtro 200 nesse endpoint quando informado <strong>s</strong> faz com que mesmo não encontrado o produto em nossas bases de dados o retorno seja no código 200.</p>
-                            <p class="card-text">URL: https://oscbr.com.br:9092/api/gtin/infor?gtin={gtin}&200=s</p>
-                        </div>
-                        <div class="card-header"><strong>Paramêtros</strong></div>
-                        <div class="card-body">
-                            <h5 style="color: darkorange;">gtin</h5>
-                            <h5 style="font-size: 65%; color: darkred;">Requerido</h5>
-                            <h6 class="card-text" style="color: dimgrey;">string (query)</h6>
-                            <h5 style="color: darkorange;">200</h5>
-                            <h5 style="font-size: 65%; color: cornflowerblue;">Opcional</h5>
-                            <h6 class="card-text" style="color: dimgrey;">string (query)</h6>
-                            <span style="color: brown;">Valor aceito: <strong>s</strong></span>
-                        </div>
-                        <div class="card-header"><strong>Respostas</strong></div>
-                        <div class="card-body">
-                            <h5 class="card-title" style="color: darkcyan;">Código 200:</h5>
-                            <p class="card-text">A requisição foi processada com sucesso.</p>
-                            <h5 class="card-title" style="color: darkcyan;">Retorno header:</h5>
-                            <p class="card-text">Media type: <strong>application/json</strong></p>
-                            <pre><code>{
-    "ean": "7896116900029",
-    "ean_tipo": "EAN13",
-    "cest": "",
-    "ncm": 7133399,
-    "nome": "FEIJAO CARIOCA KICALDO T1 1KG",
-    "nome_acento": "FEIJÃO CARIOCA TIPO 1 KICALDO PACOTE 1KG",
-    "unid_abr": "KG",
-    "unid_desc": "QUILOGRAMA",
-    "marca": "KICALDO",
-    "pais": "BRASIL",
-    "categoria": "Carioca",
-    "dh_update": "16/05/2023 22:06:29",
-    "link_foto": "https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029"
-}</code></pre>
-                        </div>
-                        <div class="card-body">
-                            <h5 style="color: darkgoldenrod;">Código 200:</h5>
-                            <p class="card-text">Não encontrado</p>
-                            <p class="card-text">O produto para qual solicitou informaçãoes não foi encontrado em nossas bases de dados.</p>
-                            <h5 class="card-title" style="color: darkcyan;">Retorno header:</h5>
-                            <p class="card-text">Media type: <strong>application/json</strong></p>
-                            <pre><code>{
-    "ean": "405",
-    "ean_tipo": "405",
-    "cest": "405",
-    "ncm": 405,
-    "nome": "405",
-    "nome_acento": "405",
-    "unid_abr": "405",
-    "unid_desc": "405",
-    "marca": "405",
-    "pais": "405",
-    "categoria": "405",
-    "dh_update": "405",
-    "link_foto": "405"
-}</code></pre>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -214,10 +155,10 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
             <div class="row">
                 <div class="col">
                     <div class="card" style="background-color: aliceblue !important;">
-                        <div class="card-header"><strong>/api/gtin/img?gtin=7896116900029</strong></div>
+                        <div class="card-header"><strong>/api/gtin/img/:gtin</strong></div>
                         <div class="card-body">
                             <p class="card-text">Endpoint de solicitação a imagem do produto</p>
-                            <p class="card-text">URL: https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029</p>
+                            <p class="card-text">URL: https://gtin.rscsistemas.com.br/api/gtin/img/:gtin</p>
                         </div>
                         <div class="card-header"><strong>Paramêtros</strong></div>
                         <div class="card-body">
@@ -233,7 +174,7 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
                             <p class="card-text">Media type: <strong>image/x-png</strong></p>
                             <div class="row">
                                 <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/7896116900029500pxpng" alt="Feijao-Carioca-Tipo-1-KICALDO-Pacote-1kg">
+                                    <img style="height: 300px; width: auto;" src="https://gtin.rscsistemas.com.br/7896116900029500pxpng" alt="Feijao-Carioca-Tipo-1-KICALDO-Pacote-1kg">
                                 </div>
                             </div>
                         </div>
@@ -243,14 +184,14 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
                             <p class="card-text">A requisição não está de acordo com o formato esperado. Verifique se realmente passou o EAN/GTIN na url da requisição.</p>
                         </div>
                         <div class="card-body">
-                            <h5 style="color: darkgoldenrod;">Código 405:</h5>
+                            <h5 style="color: darkgoldenrod;">Código 404:</h5>
                             <p class="card-text">Não encontrado</p>
                             <p class="card-text">O produto para qual solicitou a imgagem não foi encontrado em nossas bases de dados.</p>
                             <h5 class="card-title" style="color: darkcyan;">Retorno body:</h5>
                             <p class="card-text">Media type: <strong>image/x-png</strong></p>
                             <div class="row">
                                 <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/produto_not_found500pxpng" alt="Produto não encontrado">
+                                    <img style="height: 300px; width: auto;" src="https://gtin.rscsistemas.com.br/produto_sem_imagem500pxpng" alt="Produto não encontrado">
                                 </div>
                             </div>
                         </div>
@@ -262,70 +203,11 @@ Cadastre-se: https://oscbr.com.br/gtincadastro
                             <p class="card-text">Media type: <strong>image/x-png</strong></p>
                             <div class="row">
                                 <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/produto_sem_imagem500pxpng" alt="Produto sem imagem">
+                                    <img style="height: 300px; width: auto;" src="https://gtin.rscsistemas.com.br/produto_sem_imagem500pxpng" alt="Produto sem imagem">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card" style="background-color: aliceblue !important;">
-                        <div class="card-header"><strong>/api/gtin/img?gtin=7896116900029&200=s</strong></div>
-                        <div class="card-body">
-                            <p class="card-text">Endpoint de solicitação a imagem do produto</p>
-                            <p class="card-text">O paramêtro 200 nesse endpoint quando informado <strong>s</strong> faz com que mesmo não encontrado o produto em nossas bases de dados o retorno seja no código 200.</p>
-                            <p class="card-text">URL: https://oscbr.com.br:9092/api/gtin/img?gtin=7896116900029&200=s</p>
-                        </div>
-                        <div class="card-header"><strong>Paramêtros</strong></div>
-                        <div class="card-body">
-                            <h5 style="color: darkorange;">gtin</h5>
-                            <h5 style="font-size: 65%; color: darkred;">Requerido</h5>
-                            <h6 class="card-text" style="color: dimgrey;">string (query)</h6>
-                            <h5 style="color: darkorange;">200</h5>
-                            <h5 style="font-size: 65%; color: cornflowerblue;">Opcional</h5>
-                            <h6 class="card-text" style="color: dimgrey;">string (query)</h6>
-                            <span style="color: brown;">Valor aceito: <strong>s</strong></span>
-                        </div>
-                        <div class="card-header"><strong>Respostas</strong></div>
-                        <div class="card-body">
-                            <h5 style="color: darkcyan;">Código 200:</h5>
-                            <p class="card-text">A requisição foi processada com sucesso.</p>
-                            <h5 class="card-title" style="color: darkcyan;">Retorno body:</h5>
-                            <p class="card-text">Media type: <strong>image/x-png</strong></p>
-                            <div class="row">
-                                <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/7896116900029500pxpng" alt="Feijao-Carioca-Tipo-1-KICALDO-Pacote-1kg">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 style="color: darkgoldenrod;">Código 400:</h5>
-                            <p class="card-text">Requisição mal formada </p>
-                            <p class="card-text">A requisição não está de acordo com o formato esperado. Verifique se realmente passou o EAN/GTIN na url da requisição.</p>
-                        </div>
-                        <div class="card-body">
-                            <h5 style="color: darkgoldenrod;">Código 200:</h5>
-                            <p class="card-text">Não encontrado</p>
-                            <p class="card-text">O produto para qual solicitou a imgagem não foi encontrado em nossas bases de dados.</p>
-                            <h5 class="card-title" style="color: darkcyan;">Retorno body:</h5>
-                            <p class="card-text">Media type: <strong>image/x-png</strong></p>
-                            <div class="row">
-                                <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/produto_not_found500pxpng" alt="Produto não encontrado">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 style="color: darkgoldenrod;">Código 200:</h5>
-                            <p class="card-text">Sem conteúdo</p>
-                            <p class="card-text">Não foi encontrado uma imagem para o produto informado.</p>
-                            <h5 class="card-title" style="color: darkcyan;">Retorno body:</h5>
-                            <p class="card-text">Media type: <strong>image/x-png</strong></p>
-                            <div class="row">
-                                <div class="col" style="text-align: center;">
-                                    <img style="height: 300px; width: auto;" src="https://oscbr.com.br/produto_sem_imagem500pxpng" alt="Produto sem imagem">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div:
                 </div>
             </div> 
 </main>
