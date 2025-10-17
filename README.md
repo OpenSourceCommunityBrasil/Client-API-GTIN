@@ -272,5 +272,9 @@ end;
 ---
 
 **Desenvolvido por RSC Sistemas**  
-🌐 [https://rscsistemas.com.br](https://rscsistemas.com.br)
+🌐 [https://rscsistemas.com.br](https://rscsistemas.com.br)  
+
+**Roniery Santos Cardoso**  
+📧 E-mail: [roniery@rscsistemas.com.br](mailto:roniery@rscsistemas.com.br)  
+📱 WhatsApp: [+55 92 4141-2737](https://wa.me/559241412737)  
 
