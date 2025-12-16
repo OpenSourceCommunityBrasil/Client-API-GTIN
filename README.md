@@ -19,8 +19,8 @@ Se ainda não tiver, cadastre-se em:
 - **URL:** `https://gtin.rscsistemas.com.br/oauth/token`  
 - **Método:** `POST`  
 - **Headers obrigatórios:**
-  - `username: <seu_login>`
-  - `password: <sua_senha>`
+  - `Authorization: Basic <base64_encoded_credentials>` (onde as credenciais `username:password` são codificadas em base64)
+  - `Accept: application/json`
 
 **Observações**
 - O token expira em **1 hora**.
@@ -29,8 +29,7 @@ Se ainda não tiver, cadastre-se em:
 ### ✅ Exemplo cURL
 ```bash
 curl -X POST "https://gtin.rscsistemas.com.br/oauth/token" \
-  -H "username: SEU_LOGIN" \
-  -H "password: SUA_SENHA" \
+  -H "Authorization: Basic <base64_encoded_credentials>" \
   -H "Accept: application/json"
 ```
 
@@ -40,8 +39,7 @@ async function obterToken() {
   const res = await fetch("https://gtin.rscsistemas.com.br/oauth/token", {
     method: "POST",
     headers: {
-      "username": "SEU_LOGIN",
-      "password": "SUA_SENHA",
+      "Authorization": "Basic <base64_encoded_credentials>", // Substitua pelo valor codificado em base64
       "Accept": "application/json"
     }
   });
@@ -66,8 +64,7 @@ var
 begin
   HTTP := TIdHTTP.Create(nil);
   try
-    HTTP.Request.CustomHeaders.Values['username'] := 'SEU_LOGIN';
-    HTTP.Request.CustomHeaders.Values['password'] := 'SUA_SENHA';
+    HTTP.Request.CustomHeaders.Values['Authorization'] := 'Basic <base64_encoded_credentials>'; // Substitua pelo valor codificado em base64
     HTTP.Request.Accept := 'application/json';
 
     Resp := HTTP.Post('https://gtin.rscsistemas.com.br/oauth/token', nil);
