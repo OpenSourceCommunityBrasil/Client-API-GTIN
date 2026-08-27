@@ -75,6 +75,37 @@ begin
 end;
 ```
 
+### ✅ Exemplo Java (HttpClient)
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class AuthExample {
+    public static void main(String[] args) throws Exception {
+        String url = "https://gtin.rscsistemas.com.br/oauth/token";
+        String credentials = "<base64_encoded_credentials>"; // Substitua pelo valor codificado em base64
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Basic " + credentials)
+                .header("Accept", "application/json")
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            System.out.println("Token: " + response.body());
+        } else {
+            System.out.println("Falha ao obter token: " + response.body());
+        }
+    }
+}
+```
+
 ### Respostas
 - **200 OK**
 ```json
@@ -146,6 +177,38 @@ begin
     HTTP.Free;
   end;
 end;
+```
+
+### ✅ Exemplo Java (HttpClient)
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class InfoProdutoExample {
+    public static void main(String[] args) throws Exception {
+        String gtin = "7896116900029";
+        String token = "SEU_TOKEN_AQUI";
+        String url = "https://gtin.rscsistemas.com.br/api/gtin/infor/" + gtin;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + token)
+                .header("Accept", "application/json")
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            System.out.println("Produto: " + response.body());
+        } else {
+            System.out.println("Erro: " + response.body());
+        }
+    }
+}
 ```
 
 ### Respostas
@@ -240,6 +303,44 @@ begin
     HTTP.Free;
   end;
 end;
+```
+
+### ✅ Exemplo Java (HttpClient)
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class ImagemProdutoExample {
+    public static void main(String[] args) throws Exception {
+        String gtin = "7896116900029";
+        String token = "SEU_TOKEN_AQUI";
+        String url = "https://gtin.rscsistemas.com.br/api/gtin/img/" + gtin;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + token)
+                .GET()
+                .build();
+
+        Path caminhoDestino = Paths.get(gtin + ".png");
+        HttpResponse<Path> response = client.send(request, HttpResponse.BodyHandlers.ofFile(caminhoDestino));
+
+        if (response.statusCode() == 200) {
+            System.out.println("Imagem salva em: " + caminhoDestino.toAbsolutePath());
+        } else if (response.statusCode() == 204) {
+            System.out.println("Produto encontrado, porem sem imagem cadastrada");
+        } else if (response.statusCode() == 404) {
+            System.out.println("Produto não encontrado na base de dados");
+        } else {
+            System.out.println("Erro ao baixar imagem. Status: " + response.statusCode());
+        }
+    }
+}
 ```
 
 ### Respostas
