@@ -67,3 +67,12 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+# Lazarus / Free Pascal
+lib/
+backup/
+*.lps
+*.ppu
+*.compiled
+*.obj
+*.bak

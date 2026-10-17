@@ -47,6 +47,7 @@ uses
 
   , REST.Json
   , System.JSON
+  , System.UITypes
 
   {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
   , Vcl.Imaging.pngimage
@@ -114,8 +115,9 @@ type
     { Private declarations }
     procedure LimparCampos;
 
-    procedure GetInforEan;
+    function GetInforEan: Boolean;
     procedure GetFotoProduto;
+    function CarregarImagem(Strm: TStream): Boolean;
 
   public
     { Public declarations }
@@ -136,10 +138,49 @@ implementation
 
 procedure TFrmGtin.Button1Click(Sender: TObject);
 var
-  stoken: string;
+  Token: TTokenGtin;
+  Erro : string;
 begin
-  if TControllerGtin.GetToken(Trim(edt_usuario.Text), Trim(edt_senha.Text), stoken) then
-    mm_Token.Text :=  stoken;
+  mm_Token.Clear;
+  Screen.Cursor := crHourGlass;
+  try
+    if TControllerGtin.GetToken(Trim(edt_usuario.Text), Trim(edt_senha.Text), Token, Erro) then
+      mm_Token.Text :=  Token.AccessToken
+    else
+      MessageDlg('Falha ao obter o token.' + sLineBreak + Erro, mtError, [mbOK], 0);
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+function TFrmGtin.CarregarImagem(Strm: TStream): Boolean;
+var
+  Assinatura: array[0..1] of Byte;
+  Grafico   : TGraphic;
+begin
+  // A API pode devolver PNG ou JPEG: identifica pelos primeiros bytes
+  Result := False;
+  if Strm.Size < 2 then
+    Exit;
+
+  Strm.Position := 0;
+  Strm.ReadBuffer(Assinatura, SizeOf(Assinatura));
+  Strm.Position := 0;
+
+  if (Assinatura[0] = $89) and (Assinatura[1] = $50) then
+    Grafico := TPngImage.Create
+  else if (Assinatura[0] = $FF) and (Assinatura[1] = $D8) then
+    Grafico := TJPEGImage.Create
+  else
+    Exit;
+
+  try
+    Grafico.LoadFromStream(Strm);
+    img_produto.Picture.Assign(Grafico);
+    Result := True;
+  finally
+    Grafico.Free;
+  end;
 end;
 
 procedure TFrmGtin.edt_usuarioChange(Sender: TObject);
@@ -178,63 +219,48 @@ end;
 procedure TFrmGtin.GetFotoProduto;
 var
   Strm    : TMemoryStream;
-{$IF CompilerVersion >= 20.0} // Delphi 2009 and later
-  Png: TPngImage;
-{$ELSE}
-  //sem suporte para png
-{$IFEND}
+  Erro    : string;
 begin
-  if (mm_Token.Text = '') then
-    Exit;
-
   Screen.Cursor := crHourGlass;
   Strm  :=  TMemoryStream.Create;
   try
-    if TControllerGtin.GetGTINImagem(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), Strm) then
-      begin
-        {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
-          Png := TPngImage.Create;
-          try
-            Png.LoadFromStream(Strm);
-            img_produto.Picture.Assign(Png);
-          finally
-            Png.Free;
-          end;
-        {$ELSE}
-          raise Exception.Create('Abaixo do delphi 2009 não a suporte nativo para imagem png');
-        {$IFEND}
-
-      end;
+    if not TControllerGtin.GetGTINImagem(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), Strm, Erro) then
+      MessageDlg('Falha ao buscar a imagem.' + sLineBreak + Erro, mtWarning, [mbOK], 0)
+    else if not CarregarImagem(Strm) then
+      MessageDlg('Formato de imagem não suportado.', mtWarning, [mbOK], 0);
   finally
     Strm.Free;
     Screen.Cursor := crDefault;
   end;
 end;
 
-procedure TFrmGtin.GetInforEan;
+function TFrmGtin.GetInforEan: Boolean;
 var
-  retorno     : string;
+  retorno : string;
+  Erro    : string;
   ProdJson: TJSONObject;
 begin
-  if (mm_Token.Text = '') then
-    Exit;
   Screen.Cursor := crHourGlass;
   try
-    if not TControllerGtin.GetGTINInfo(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), retorno) then
+    Result := TControllerGtin.GetGTINInfo(Trim(edt_pesquisa_ean.Text), Trim(mm_Token.Text), retorno, Erro);
+    if not Result then
+    begin
+      MessageDlg('Falha ao consultar o produto.' + sLineBreak + Erro, mtWarning, [mbOK], 0);
       Exit;
+    end;
 
     ProdJson  :=  TJSONObject.ParseJSONValue(retorno) as TJSONObject;
     try
-      edt_ean.Text                    :=  ProdJson.GetValue<string>('ean');
-      edt_nome.Text                   :=  ProdJson.GetValue<string>('nome');
-      edt_ncm.Text                    :=  ProdJson.GetValue<string>('ncm');
-      edt_marca.Text                  :=  ProdJson.GetValue<string>('marca');
-      edt_pais.Text                   :=  ProdJson.GetValue<string>('pais');
-      edt_categoria.Text              :=  ProdJson.GetValue<string>('categoria');
-      edt_link_foto.Text              :=  ProdJson.GetValue<string>('link_foto');
-      edt_cest_codigo.Text            :=  ProdJson.GetValue<string>('cest');
-      edt_dh_update.Text              :=  ProdJson.GetValue<string>('dh_update');
-      edt_produto_acento.Text         :=  ProdJson.GetValue<string>('nome_acento');
+      edt_ean.Text                    :=  TControllerGtin.JsonTexto(ProdJson, 'ean');
+      edt_nome.Text                   :=  TControllerGtin.JsonTexto(ProdJson, 'nome');
+      edt_ncm.Text                    :=  TControllerGtin.JsonTexto(ProdJson, 'ncm');
+      edt_marca.Text                  :=  TControllerGtin.JsonTexto(ProdJson, 'marca');
+      edt_pais.Text                   :=  TControllerGtin.JsonTexto(ProdJson, 'pais');
+      edt_categoria.Text              :=  TControllerGtin.JsonTexto(ProdJson, 'categoria');
+      edt_link_foto.Text              :=  TControllerGtin.JsonTexto(ProdJson, 'link_foto');
+      edt_cest_codigo.Text            :=  TControllerGtin.JsonTexto(ProdJson, 'cest');
+      edt_dh_update.Text              :=  TControllerGtin.JsonTexto(ProdJson, 'dh_update');
+      edt_produto_acento.Text         :=  TControllerGtin.JsonTexto(ProdJson, 'nome_acento');
     finally
       ProdJson.Free;
     end;
@@ -264,8 +290,23 @@ begin
 end;
 
 procedure TFrmGtin.sbtn_pesquisar_eanClick(Sender: TObject);
+var
+  Erro: string;
 begin
   LimparCampos;
+
+  if Trim(mm_Token.Text) = '' then
+  begin
+    MessageDlg('Solicite o token antes de consultar.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  // Valida antes de consultar: GTIN inválido repetido suspende as consultas (429)
+  if not TControllerGtin.ValidarGTIN(Trim(edt_pesquisa_ean.Text), Erro) then
+  begin
+    MessageDlg(Erro, mtWarning, [mbOK], 0);
+    Exit;
+  end;
 
   case rdgTipoConsulta.ItemIndex of
     0:
@@ -278,8 +319,8 @@ begin
       end;
     2:
       begin
-        GetInforEan;
-        GetFotoProduto;
+        if GetInforEan then
+          GetFotoProduto;
       end;
   end;
 end;

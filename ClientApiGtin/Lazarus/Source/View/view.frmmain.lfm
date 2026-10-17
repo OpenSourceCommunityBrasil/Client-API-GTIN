@@ -616,7 +616,7 @@ object Form1: TForm1
       Top = 48
       Width = 224
       TabOrder = 1
-      Text = 'eliana'
+      Text = ''
     end
     object Label1: TLabel
       Left = 21
@@ -631,7 +631,7 @@ object Form1: TForm1
       Top = 48
       Width = 224
       TabOrder = 2
-      Text = '131825'
+      Text = ''
     end
     object Label2: TLabel
       Left = 261

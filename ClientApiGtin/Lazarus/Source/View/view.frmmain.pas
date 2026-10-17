@@ -101,7 +101,7 @@ type
     procedure img_UrlGitHubClick(Sender: TObject);
     procedure img_UrlGtinClick(Sender: TObject);
   private
-    procedure BuscarInformacao;
+    function BuscarInformacao: Boolean;
     procedure BuscarFoto;
 
   public
@@ -121,11 +121,20 @@ uses
 { TForm1 }
 
 procedure TForm1.Btn_SolicitarTokenClick(Sender: TObject);
+var
+  Token: TTokenGtin;
+  Erro : string;
 begin
-  mm_Token.Text:=TControllerGtin.GetToken(Trim(Edt_Usuario.Text), Trim(Edt_Senha.Text));
+  mm_Token.Clear;
+  if TControllerGtin.GetToken(Trim(Edt_Usuario.Text), Trim(Edt_Senha.Text), Token, Erro) then
+    mm_Token.Text := Token.AccessToken
+  else
+    MessageDlg('Falha ao obter o token.' + LineEnding + Erro, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0);
 end;
 
 procedure TForm1.Btn_ConsultarClick(Sender: TObject);
+var
+  Erro: string;
 begin
   if Trim(mm_Token.Text) = '' then
    begin
@@ -139,6 +148,13 @@ begin
      Exit;
    end;
 
+  // Valida antes de consultar: GTIN inválido repetido suspende as consultas (429)
+  if not TControllerGtin.ValidarGTIN(Trim(Edt_Gtin.Text), Erro) then
+   begin
+     MessageDlg(Erro, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], 0);
+     Exit;
+   end;
+
   case rdgTipoConsulta.ItemIndex of
   0:
     begin
@@ -149,8 +165,8 @@ begin
       BuscarFoto;
     end;
   else
-    BuscarInformacao;
-    BuscarFoto;
+    if BuscarInformacao then
+      BuscarFoto;
   end;
 
 
@@ -163,7 +179,7 @@ begin
   lblTitle.Caption  := Self.Caption;
   lblversao.Caption := 'Versão API: ' + VERSAO_API  + ' - Versão Cliente: '  + VERSAO_DEMO ;
   Edt_Gtin.Text     := '7896116900029';
-  mm_Token.Text     := 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIwOCwiZXhwIjoxNzE1NDgxOTk1LCJpYXQiOjE3MTU0NzgzOTV9.ZU-CD7g4l2dXwN7bBCdLmOsc8pzb4jWFKilkj7SFVdc';
+  mm_Token.Clear;
 end;
 
 procedure TForm1.img_UrlGitHubClick(Sender: TObject);
@@ -176,41 +192,50 @@ begin
   OpenURL('https://gtin.rscsistemas.com.br');
 end;
 
-procedure TForm1.BuscarInformacao;
+function TForm1.BuscarInformacao: Boolean;
 var
   JSONData: TJSONData;
   Response: string;
+  Erro    : string;
 begin
-  Response := TControllerGtin.GetGTINInfo(Trim(Edt_Gtin.Text), Trim(mm_Token.Text));
-  JSONData := GetJSON(Response);
+  Result := TControllerGtin.GetGTINInfo(Trim(Edt_Gtin.Text), Trim(mm_Token.Text), Response, Erro);
+  if not Result then
+  begin
+    MessageDlg('Falha ao consultar o produto.' + LineEnding + Erro, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], 0);
+    Exit;
+  end;
 
-  edt_ean.Text := JSONData.FindPath('ean').AsString;
-  edt_ean_tipo.Text := JSONData.FindPath('ean_tipo').AsString;
-  edt_cest_codigo.Text := JSONData.FindPath('cest').AsString;
-  edt_ncm.Text := JSONData.FindPath('ncm').AsString;
-  edt_nome.Text := JSONData.FindPath('nome').AsString;
-  edt_produto_acento.Text := JSONData.FindPath('nome_acento').AsString;
-  edt_unid_abr.Text := JSONData.FindPath('unid_abr').AsString;
-  edt_unid_desc.Text := JSONData.FindPath('unid_desc').AsString;
-  edt_marca.Text := JSONData.FindPath('marca').AsString;
-  edt_pais.Text := JSONData.FindPath('pais').AsString;
-  edt_categoria.Text := JSONData.FindPath('categoria').AsString;
-  edt_dh_update.Text := JSONData.FindPath('dh_update').AsString;
-  edt_link_foto.Text := JSONData.FindPath('link_foto').AsString;
+  JSONData := GetJSON(Response);
+  try
+    edt_ean.Text := TControllerGtin.JsonTexto(JSONData, 'ean');
+    edt_ean_tipo.Text := TControllerGtin.JsonTexto(JSONData, 'ean_tipo');
+    edt_cest_codigo.Text := TControllerGtin.JsonTexto(JSONData, 'cest');
+    edt_ncm.Text := TControllerGtin.JsonTexto(JSONData, 'ncm');
+    edt_nome.Text := TControllerGtin.JsonTexto(JSONData, 'nome');
+    edt_produto_acento.Text := TControllerGtin.JsonTexto(JSONData, 'nome_acento');
+    edt_unid_abr.Text := TControllerGtin.JsonTexto(JSONData, 'unid_abr');
+    edt_unid_desc.Text := TControllerGtin.JsonTexto(JSONData, 'unid_desc');
+    edt_marca.Text := TControllerGtin.JsonTexto(JSONData, 'marca');
+    edt_pais.Text := TControllerGtin.JsonTexto(JSONData, 'pais');
+    edt_categoria.Text := TControllerGtin.JsonTexto(JSONData, 'categoria');
+    edt_dh_update.Text := TControllerGtin.JsonTexto(JSONData, 'dh_update');
+    edt_link_foto.Text := TControllerGtin.JsonTexto(JSONData, 'link_foto');
+  finally
+    JSONData.Free;
+  end;
 end;
 
 procedure TForm1.BuscarFoto;
 var
   vImagem: TMemoryStream;
+  Erro   : string;
 begin
   vImagem := TMemoryStream.Create;
   try
-    TControllerGtin.GetGTINImagem(Trim(Edt_Gtin.Text), Trim(mm_Token.Text), vImagem);
-    if (vImagem.Size <> 0) then
-    begin
-      vImagem.Position := 0;
-      img_produto.Picture.LoadFromStream(vImagem);
-    end;
+    if TControllerGtin.GetGTINImagem(Trim(Edt_Gtin.Text), Trim(mm_Token.Text), vImagem, Erro) then
+      img_produto.Picture.LoadFromStream(vImagem)
+    else
+      MessageDlg('Falha ao buscar a imagem.' + LineEnding + Erro, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], 0);
   finally
     vImagem.Free;
   end;
